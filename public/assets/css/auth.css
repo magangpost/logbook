@@ -1,18 +1,47 @@
 .divider:after,
 .divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+  }
+  .bg-dark-blue {
+      background-color: #00008B; /* Biru Tua */
+    }  
+  .h-custom {
+    height: calc(100% - 73px);
+  }
+  @media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
 }
-.bg-dark-blue {
-    background-color: #00008B; /* Biru Tua */
-  }  
-.h-custom {
-height: calc(100% - 73px);
+
+li {
+  list-style: none;
+  margin: 20px 0 20px 0;
 }
-@media (max-width: 450px) {
-.h-custom {
-height: 100%;
+
+a {
+    text-decoration: none;
 }
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    margin-left: -300px;
+    transition: 0.4s;
+}
+
+.active-main-content {
+    margin-left: 250px;
+}
+
+.active-sidebar {
+    margin-left: 0;
+}
+
+#main-content {
+    transition: 0.4s;
 }

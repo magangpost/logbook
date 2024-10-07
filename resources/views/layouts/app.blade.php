@@ -12,11 +12,17 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="{{asset('assets/css/auth.css')}}">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/sidebutton.js'])
 </head>
-<body>
+<body id="body-pd">
+    <!--Container Main end-->
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -71,10 +77,62 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
+        
+        <div>
+          <div class="sidebar p-4 bg-primary" id="sidebar">
+            <h4 class="mb-5 text-white">SuperVideo</h4>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-house mr-2"></i>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-fire mr-2"></i>
+                Populer
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-newspaper mr-2"></i>
+                News
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-bicycle mr-2"></i>
+                Sports
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-boombox mr-2"></i>
+                Music
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-film mr-2"></i>
+                Film
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-bookmark mr-2"></i>
+                Bookmark
+              </a>
+            </li>
+          </div>
+        </div>
+        <div class="p-4" id="main-content">
+            <button class="btn btn-primary" id="button-toggle">
+                <i class="bi bi-list"></i>
+            </button>
+            <main id="main-content" class="py-4">
             @yield('content')
         </main>
+        </div>
     </div>
 </body>
 </html>
