@@ -82,7 +82,7 @@
           <div class="sidebar p-4 bg-secondary" id="sidebar">
             <h4 class="mb-5 text-white">{{ config('app.name', 'Logbook') }}</h4>
             <li>
-              <a class="text-white" href="#">
+              <a class="text-white" href="{{ route('home') }}">
                 <i class="bi bi-house mr-2"></i>
                 Dashboard
               </a>
