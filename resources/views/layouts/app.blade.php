@@ -79,8 +79,8 @@
         </nav>
         
         <div>
-          <div class="sidebar p-4 bg-primary" id="sidebar">
-            <h4 class="mb-5 text-white">SuperVideo</h4>
+          <div class="sidebar p-4 bg-secondary" id="sidebar">
+            <h4 class="mb-5 text-white">{{ config('app.name', 'Logbook') }}</h4>
             <li>
               <a class="text-white" href="#">
                 <i class="bi bi-house mr-2"></i>
@@ -126,7 +126,7 @@
           </div>
         </div>
         <div class="p-4" id="main-content">
-            <button class="btn btn-primary" id="button-toggle">
+            <button class="btn btn-secondary" id="button-toggle">
                 <i class="bi bi-list"></i>
             </button>
             <main id="main-content" class="py-4">

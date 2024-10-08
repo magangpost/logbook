@@ -61,7 +61,7 @@
 
                                     <div class="row mb-0 justify-content-end">
                                         <div class="col-md">
-                                            <button type="submit" class="btn btn-primary float-end">
+                                            <button type="submit" class="btn btn-secondary float-end">
                                                 {{ __('Login') }}
                                             </button>
 
