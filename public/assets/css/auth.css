@@ -23,7 +23,7 @@ li {
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none !important;
 }
 
 .sidebar {
@@ -44,4 +44,8 @@ a {
 
 #main-content {
     transition: 0.4s;
+}
+
+.navbar {
+    height: 50px !important; /*i assume your navbar size 100px*/
 }

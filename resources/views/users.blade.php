@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Tabel Users') }}</div>
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -25,8 +25,8 @@
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->role }}</td>
-                                        <td>Update</td>
-                                        <td>Delete</td>
+                                        <td><button type="button" class="btn btn-primary">Update</button></td>
+                                        <td><button type="button" class="btn btn-danger">Delete</button></td>
                                     </tr>
                                 @endforeach
                             </tbody>
