@@ -12,7 +12,7 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::all();
         $jumlahTransaksi = Transaksi::count(); // Menghitung jumlah transaksi
-        return view('transaksi.index', compact('transaksi', 'jumlahTransaksi'));
+        return view('transaksi.index', ['transaksi' => $transaksi], ['jumlahTransaksi' => $jumlahTransaksi]);
     }
 
     public function create()
@@ -23,7 +23,7 @@ class TransaksiController extends Controller
     public function show($id)
     {
         $transaksi = Transaksi::findOrFail($id);
-        return view('transaksi.show', compact('transaksi'));
+        return view('transaksi.show', ['transaksi' => $transaksi]);
     }
 
     public function store(Request $request)
@@ -73,7 +73,7 @@ class TransaksiController extends Controller
     public function edit($id)
     {
         $transaksi = Transaksi::findOrFail($id);
-        return view('transaksi.edit', compact('transaksi'));
+        return view('transaksi.edit', ['transaksi' => $transaksi]);
     }
 
     public function update(Request $request, $id)
@@ -117,7 +117,7 @@ class TransaksiController extends Controller
         }
 
         $transaksi = Transaksi::findOrFail($id);
-        $transaksi->update($request->all());
+        $transaksi->save();
         return redirect()->route('transaksi.index');
     }
 

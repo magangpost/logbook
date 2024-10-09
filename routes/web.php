@@ -13,7 +13,9 @@ Auth::routes();
 
 // Additional routes
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/users', [UserController::class, 'index'])->name('users');
 
 Route::resource('transaksi', TransaksiController::class);
-Route::get('/transaksi/count', [TransaksiController::class, 'countTransaksi'])->name('transaksi.count');
+
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::resource('users', UserController::class);
+});

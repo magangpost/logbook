@@ -8,7 +8,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 class Transaksi extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'transaksi';
+    protected $table = 'transaksi';
 
     protected $fillable = [
         'no_resi', 'layanan', 'isi_kiriman', 'nama_pengirim', 'alamat_pengirim',

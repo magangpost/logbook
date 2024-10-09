@@ -25,8 +25,14 @@
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->role }}</td>
-                                        <td><button type="button" class="btn btn-primary">Update</button></td>
-                                        <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                        <td><a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Update</a></td>
+                                        <td>
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

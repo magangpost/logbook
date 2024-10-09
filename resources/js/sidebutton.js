@@ -7,3 +7,10 @@ document.getElementById("button-toggle").addEventListener("click", () => {
     // when the button-toggle is clicked, it will add/remove the active-main-content class
     document.getElementById("main-content").classList.toggle("active-main-content");
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    var usernameElement = document.getElementById('username usernamedit');
+    if (usernameElement) {
+        usernameElement.readOnly = true;
+    }
+});

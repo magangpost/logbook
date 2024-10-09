@@ -90,39 +90,15 @@
               </a>
             </li>
             <li>
-              <a class="text-white" href="{{ route('users') }}">
+              <a class="text-white" href="{{ route('users.index') }}">
               <i class="bi bi-person-lines-fill"></i>
                 Users
               </a>
             </li>
             <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-newspaper mr-2"></i>
-                News
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-bicycle mr-2"></i>
-                Sports
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-boombox mr-2"></i>
-                Music
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-film mr-2"></i>
-                Film
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-bookmark mr-2"></i>
-                Bookmark
+              <a class="text-white" href="{{ route('transaksi.index') }}">
+                <i class="bi bi-bag-check"></i>
+                Transaction
               </a>
             </li>
           </div>

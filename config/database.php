@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mongodb'),
+    'default' => env('DB_CONNECTION'),
 
     /*
     |--------------------------------------------------------------------------
@@ -33,10 +33,10 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => env('DB_URI', 'mongodb+srv://logbook:ratuibrohim2830@cluster0.9drnx.mongodb.net/logbook?retryWrites=true&w=majority'),
+            'dsn' => env('DB_URI'),
             'database' => 'logbook',
             'options'  => [
-                'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'),
+                'database' => env('DB_AUTHENTICATION_DATABASE'),
             ],
         ],
 
