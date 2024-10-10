@@ -12,8 +12,8 @@ class TransaksiController extends Controller
 {
     public function index()
     {
-        $transaksi = Transaksi::all();
-        $jumlahTransaksi = Transaksi::count(); // Menghitung jumlah transaksi
+        $transaksi = Transaksi::paginate(20);
+        $jumlahTransaksi = Transaksi::count();
         return view('transaksi.index', ['transaksi' => $transaksi], ['jumlahTransaksi' => $jumlahTransaksi]);
     }
 
