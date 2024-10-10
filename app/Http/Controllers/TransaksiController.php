@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\Validator;
+use App\Exports\ExportTransaksi;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransaksiController extends Controller
 {
@@ -126,5 +128,15 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::findOrFail($id);
         $transaksi->delete();
         return redirect()->route('transaksi.index');
+    }
+
+    public function export_excel()
+    {
+        return Excel::download(new ExportTransaksi, 'transaksi.xlsx');
+    }
+
+    public function export_csv()
+    {
+        return Excel::download(new ExportTransaksi, 'transaksi.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 }

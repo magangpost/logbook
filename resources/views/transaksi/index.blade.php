@@ -6,8 +6,8 @@
         <div class="card">
             <div class="card-body">
                 <a href="{{ route('transaksi.create') }}" class="btn btn-success mb-3">Create New Transaksi</a>
-                <a href="{{ route('transaksi.exportExcel') }}" class="btn btn-primary mb-3">Export to Excel</a>
-                <a href="{{ route('transaksi.exportCsv') }}" class="btn btn-info mb-3">Export to CSV</a>
+                <a href="{{ route('transaksi.export_excel') }}" class="btn btn-primary mb-3">Export to Excel</a>
+                <a href="{{ route('transaksi.export_csv') }}" class="btn btn-info mb-3">Export to CSV</a>
                 <p>Total Transactions: {{ $jumlahTransaksi }}</p>
                 <div class="table-responsive">
                     <table class="table">
