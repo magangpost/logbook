@@ -168,7 +168,7 @@
                             <label for="berat" class="col-md-5 col-form-label text-md-start">{{ __('Berat') }}</label>
 
                             <div class="col-md-6">
-                                <input id="berat" type="text" class="form-control @error('berat') is-invalid @enderror" name="berat" value="{{ old('berat') }}" required autocomplete="berat" autofocus>
+                                <input id="berat" type=number step=any class="form-control @error('berat') is-invalid @enderror" name="berat" value="{{ old('berat') }}" required autocomplete="berat" autofocus>
 
                                 @error('berat')
                                     <span class="invalid-feedback" role="alert">

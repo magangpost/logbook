@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('alamat_penerima', 255)->nullable();
             $table->string('kodepos_penerima', 255)->nullable();
             $table->string('kota_tujuan', 255)->nullable();
-            $table->string('berat', 255)->nullable();
+            $table->string('berat', 10, 2)->nullable();
             $table->integer('bea_dasar')->nullable();
             $table->string('ppn', 255)->nullable();
             $table->string('htnb', 255)->nullable();
