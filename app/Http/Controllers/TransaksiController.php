@@ -12,11 +12,11 @@ class TransaksiController extends Controller
 {
     public function index(Request $request)
     {
-        $search_param = $request->query('search_param');
+        $kodepelanggan = $request->query('kodepelanggan');
 
-        if ($search_param) {
+        if ($kodepelanggan) {
             // Menggunakan paginate untuk paginasi hasil pencarian
-            $transaksi = Transaksi::search($search_param)->paginate(20);
+            $transaksi = Transaksi::search($kodepelanggan)->paginate(20);
         } else {
             // Menggunakan paginate untuk paginasi hasil default
             $transaksi = Transaksi::paginate(20);
@@ -27,7 +27,7 @@ class TransaksiController extends Controller
         return view('transaksi.index', [
             'transaksi' => $transaksi,
             'jumlahTransaksi' => $jumlahTransaksi,
-            'search_param' => $search_param
+            'kodepelanggan' => $kodepelanggan
         ]);
     }
 
@@ -146,16 +146,16 @@ class TransaksiController extends Controller
 
     public function exportExcel(Request $request)
     {
-        $search_param = $request->query('search_param');
+        $kodepelanggan = $request->query('kodepelanggan');
 
-        return Excel::download(new ExportTransaksi($search_param), 'transaksi.xlsx');
+        return Excel::download(new ExportTransaksi($kodepelanggan), 'transaksi.xlsx');
     }
 
     public function export_csv(Request $request)
     {
-        $search_param = $request->query('search_param');
+        $kodepelanggan = $request->query('kodepelanggan');
 
-        return Excel::download(new ExportTransaksi($search_param), 'transaksi.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new ExportTransaksi($kodepelanggan), 'transaksi.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
 }

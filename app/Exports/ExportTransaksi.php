@@ -9,17 +9,17 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class ExportTransaksi implements FromCollection, WithHeadings, WithMapping
 {
-    protected $search_param;
+    protected $kodepelanggan;
 
-    public function __construct($search_param = null)
+    public function __construct($kodepelanggan = null)
     {
-        $this->search_param = $search_param;
+        $this->kodepelanggan = $kodepelanggan;
     }
 
     public function collection()
     {
-        if ($this->search_param) {
-            return Transaksi::search($this->search_param)->get();
+        if ($this->kodepelanggan) {
+            return Transaksi::search($this->kodepelanggan)->get();
         } else {
             return Transaksi::all();
         }

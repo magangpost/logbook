@@ -6,10 +6,10 @@
         <div class="card">
             <div class="card-body">
                 <a href="{{ route('transaksi.create') }}" class="btn btn-success mb-3">Create New Transaksi</a>
-                <a href="{{ route('transaksi.export_excel', ['search_param' => request('search_param')]) }}" class="btn btn-primary mb-3">Export to Excel</a>
-                <a href="{{ route('transaksi.export_csv', ['search_param' => request('search_param')]) }}" class="btn btn-info mb-3">Export to CSV</a>
+                <a href="{{ route('transaksi.export_excel', ['kodepelanggan' => request('kodepelanggan')]) }}" class="btn btn-primary mb-3">Export to Excel</a>
+                <a href="{{ route('transaksi.export_csv', ['kodepelanggan' => request('kodepelanggan')]) }}" class="btn btn-info mb-3">Export to CSV</a>
                 <form method="GET" action="{{ route('transaksi.index') }}" class="mb-3">
-                    <input type="text" name="search_param" placeholder="Cari Transaksi" value="{{ request('search_param') }}" class="form-control" style="display:inline-block; width:auto;">
+                    <input type="text" name="kodepelanggan" placeholder="Cari Transaksi" value="{{ request('kodepelanggan') }}" class="form-control" style="display:inline-block; width:auto;">
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </form>
                 <p>Total Transactions: {{ $jumlahTransaksi }}</p>
