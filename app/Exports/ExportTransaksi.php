@@ -10,19 +10,30 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 class ExportTransaksi implements FromCollection, WithHeadings, WithMapping
 {
     protected $kodepelanggan;
+    protected $tanggal_kirim;
+    protected $tanggal_terima;
 
-    public function __construct($kodepelanggan = null)
+    public function __construct($kodepelanggan = null, $tanggal_kirim = null, $tanggal_terima = null)
     {
         $this->kodepelanggan = $kodepelanggan;
+        $this->tanggal_kirim = $tanggal_kirim;
+        $this->tanggal_terima = $tanggal_terima;
     }
 
     public function collection()
     {
+        $query = Transaksi::query();
+
         if ($this->kodepelanggan) {
-            return Transaksi::search($this->kodepelanggan)->get();
-        } else {
-            return Transaksi::all();
+            $query->where('kodepelanggan', 'like', '%' . $this->kodepelanggan . '%');
         }
+
+        if ($this->tanggal_kirim && $this->tanggal_terima) {
+            $query->whereBetween('tanggal_kirim', [$this->tanggal_kirim, $this->tanggal_terima])
+                  ->whereBetween('tanggal_terima', [$this->tanggal_kirim, $this->tanggal_terima]);
+        }
+
+        return $query->get();
     }
 
     public function headings(): array

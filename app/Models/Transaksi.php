@@ -11,6 +11,7 @@ use Laravel\Scout\Attributes\SearchUsingPrefix;
 class Transaksi extends Model
 {
     use HasFactory, Searchable;
+    public $timestamps = false;
     protected $connection = 'mongodb';
     protected $table = 'transaksi';
 
@@ -23,12 +24,13 @@ class Transaksi extends Model
         'kodepelanggan', 'nilaicod', 'va', 'nopendkirim', 'beratvoulume'
     ];
 
-    #[SearchUsingPrefix(['kodepelanggan', ''])]
+    #[SearchUsingPrefix(['kodepelanggan', 'tanggal_kirim', 'tanggal_terima'])]
     public function toSearchableArray(): array
     {
         return [
             'kodepelanggan' => $this->kodepelanggan,
-            'tanggal_kirim' => $this->tanggal_terima,
+            'tanggal_kirim' => $this->tanggal_kirim,
+            'tanggal_terima' => $this->tanggal_terima,
         ];
     }
 }

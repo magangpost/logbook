@@ -13,21 +13,39 @@ class TransaksiController extends Controller
     public function index(Request $request)
     {
         $kodepelanggan = $request->query('kodepelanggan');
+        $tanggal_kirim = $request->query('tanggal_kirim');
+        $tanggal_terima = $request->query('tanggal_terima');
+
+        $query = Transaksi::query();
 
         if ($kodepelanggan) {
-            // Menggunakan paginate untuk paginasi hasil pencarian
-            $transaksi = Transaksi::search($kodepelanggan)->paginate(20);
-        } else {
-            // Menggunakan paginate untuk paginasi hasil default
-            $transaksi = Transaksi::paginate(20);
+            $query->where('kodepelanggan', 'like', '%' . $kodepelanggan . '%');
         }
 
+        if ($tanggal_kirim && $tanggal_terima) {
+            $query->whereBetween('tanggal_kirim', [$tanggal_kirim, $tanggal_terima])
+                  ->whereBetween('tanggal_terima', [$tanggal_kirim, $tanggal_terima]);
+        }
+
+        $transaksi = $query->paginate(20)->withQueryString();
+
+        $transaksi = $query->paginate(20);
+
+        $totalDelivered = Transaksi::where('status', 'DELIVERED')->count();
+        $totalPending = Transaksi::where('status', 'PENDING')->count();
+        $totalCancelled = Transaksi::where('status', 'CANCELLED')->count();
+        
         $jumlahTransaksi = Transaksi::count();
         
         return view('transaksi.index', [
             'transaksi' => $transaksi,
             'jumlahTransaksi' => $jumlahTransaksi,
-            'kodepelanggan' => $kodepelanggan
+            'totalDelivered' => $totalDelivered,
+            'totalPending' => $totalPending,
+            'totalCancelled' => $totalCancelled,
+            'kodepelanggan' => $kodepelanggan,
+            'tanggal_kirim' => $tanggal_kirim,
+            'tanggal_terima' => $tanggal_terima,
         ]);
     }
 
@@ -144,18 +162,21 @@ class TransaksiController extends Controller
         return redirect()->route('transaksi.index');
     }
 
-    public function exportExcel(Request $request)
+    public function export_excel(Request $request)
     {
         $kodepelanggan = $request->query('kodepelanggan');
+        $tanggal_kirim = $request->query('tanggal_kirim');
+        $tanggal_terima = $request->query('tanggal_terima');
 
-        return Excel::download(new ExportTransaksi($kodepelanggan), 'transaksi.xlsx');
+        return Excel::download(new ExportTransaksi($kodepelanggan, $tanggal_kirim, $tanggal_terima), 'transaksi.xlsx');
     }
 
     public function export_csv(Request $request)
     {
         $kodepelanggan = $request->query('kodepelanggan');
+        $tanggal_kirim = $request->query('tanggal_kirim');
+        $tanggal_terima = $request->query('tanggal_terima');
 
-        return Excel::download(new ExportTransaksi($kodepelanggan), 'transaksi.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new ExportTransaksi($kodepelanggan, $tanggal_kirim, $tanggal_terima), 'transaksi.csv', \Maatwebsite\Excel\Excel::CSV);
     }
-
 }

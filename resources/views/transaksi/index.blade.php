@@ -3,16 +3,59 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="card">
+        <div class="card mb-3">
+            <div class="row mb-4 mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-sm-3 mb-3">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <i class="bi bi-list-check fs-2 text-success"></i>
+                                <h5 class="card-title">Total Transaksi</h5>
+                                <p class="card-text">{{ $jumlahTransaksi }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <i class="bi bi-check-circle fs-2 text-primary"></i>
+                                <h5 class="card-title">Transaksi Terkirim</h5>
+                                <p class="card-text">{{ $totalDelivered }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <i class="bi bi-hourglass-split fs-2 text-warning"></i>
+                                <h5 class="card-title">Transaksi Tertunda</h5>
+                                <p class="card-text">{{ $totalPending }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <i class="bi bi-x-circle fs-2 text-danger"></i>
+                                <h5 class="card-title">Transaksi Digagalkan</h5>
+                                <p class="card-text">{{ $totalCancelled }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-3">
             <div class="card-body">
                 <a href="{{ route('transaksi.create') }}" class="btn btn-success mb-3">Create New Transaksi</a>
-                <a href="{{ route('transaksi.export_excel', ['kodepelanggan' => request('kodepelanggan')]) }}" class="btn btn-primary mb-3">Export to Excel</a>
-                <a href="{{ route('transaksi.export_csv', ['kodepelanggan' => request('kodepelanggan')]) }}" class="btn btn-info mb-3">Export to CSV</a>
+                <a href="{{ route('transaksi.export_excel', ['kodepelanggan' => request('kodepelanggan'), 'tanggal_kirim' => request('tanggal_kirim'), 'tanggal_terima' => request('tanggal_terima')]) }}" class="btn btn-primary mb-3">Export to Excel</a>
+                <a href="{{ route('transaksi.export_csv', ['kodepelanggan' => request('kodepelanggan'), 'tanggal_kirim' => request('tanggal_kirim'), 'tanggal_terima' => request('tanggal_terima')]) }}" class="btn btn-info mb-3">Export to CSV</a>
                 <form method="GET" action="{{ route('transaksi.index') }}" class="mb-3">
                     <input type="text" name="kodepelanggan" placeholder="Cari Transaksi" value="{{ request('kodepelanggan') }}" class="form-control" style="display:inline-block; width:auto;">
+                    <input type="date" name="tanggal_kirim" value="{{ request('tanggal_kirim') }}" class="form-control" style="display:inline-block; width:auto;" placeholder="Tanggal Kirim">
+                    <input type="date" name="tanggal_terima" value="{{ request('tanggal_terima') }}" class="form-control" style="display:inline-block; width:auto;" placeholder="Tanggal Terima">
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </form>
-                <p>Total Transactions: {{ $jumlahTransaksi }}</p>
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="table-dark">
@@ -100,7 +143,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $transaksi->links() }}
+                {{ $transaksi->appends(request()->query())->links() }}
             </div>
         </div>
     </div>

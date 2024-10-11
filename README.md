@@ -4,6 +4,9 @@ composer require laravel/ui --ignore-platform-reqs
 
 php artisan serve
 
+php artisan tinker
+Transaksi::factory()->count(100)->create();
+
 php artisan ui bootstrap --auth
 npm install
 npm i sass@1.77.6 --save-exact

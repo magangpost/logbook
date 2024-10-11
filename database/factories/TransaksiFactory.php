@@ -13,6 +13,7 @@ class TransaksiFactory extends Factory
 
     public function definition(): array
     {
+        $tanggalKirim = $this->faker->dateTimeThisYear();
         return [
             'no_resi' => $this->faker->regexify('[A-Z0-9]{10}'),
             'layanan' => $this->faker->randomElement(['PE', 'REG', 'YES']),
@@ -30,8 +31,8 @@ class TransaksiFactory extends Factory
             'ppn' => $this->faker->numberBetween(0, 10),
             'htnb' => $this->faker->randomElement(['kosong', 'diisi']),
             'jumlah' => $this->faker->numberBetween(1000, 50000),
-            'tanggal_kirim' => $this->faker->date,
-            'tanggal_terima' => $this->faker->date,
+            'tanggal_kirim' => $tanggalKirim->format('Y-m-d'),
+            'tanggal_terima' => $this->faker->dateTimeBetween($tanggalKirim, '+1 week')->format('Y-m-d'),
             'status' => $this->faker->randomElement(['DELIVERED', 'PENDING', 'CANCELLED']),
             'sla' => $this->faker->numberBetween(1, 5),
             'aktual_sla' => $this->faker->numberBetween(1, 5),
