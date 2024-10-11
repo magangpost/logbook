@@ -4,42 +4,40 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="card mb-3">
-            <div class="row mb-4 mt-4">
-                <div class="row justify-content-center">
-                    <div class="col-sm-3 mb-3">
-                        <div class="card text-center bg-light">
-                            <div class="card-body">
-                                <i class="bi bi-list-check fs-2 text-success"></i>
-                                <h5 class="card-title">Total Transaksi</h5>
-                                <p class="card-text">{{ $jumlahTransaksi }}</p>
-                            </div>
+            <div class="row mb-3 mt-4">
+                <div class="col-sm-3 mb-3">
+                    <div class="card text-center bg-light">
+                        <div class="card-body">
+                            <i class="bi bi-list-check fs-2 text-success"></i>
+                            <h5 class="card-title">Total Transaksi</h5>
+                            <p class="card-text">{{ $jumlahTransaksi }}</p>
                         </div>
                     </div>
-                    <div class="col-sm-3 mb-3">
-                        <div class="card text-center bg-light">
-                            <div class="card-body">
-                                <i class="bi bi-check-circle fs-2 text-primary"></i>
-                                <h5 class="card-title">Transaksi Terkirim</h5>
-                                <p class="card-text">{{ $totalDelivered }}</p>
-                            </div>
+                </div>
+                <div class="col-sm-3 mb-3">
+                    <div class="card text-center bg-light">
+                        <div class="card-body">
+                            <i class="bi bi-check-circle fs-2 text-primary"></i>
+                            <h5 class="card-title">Transaksi Terkirim</h5>
+                            <p class="card-text">{{ $totalDelivered }}</p>
                         </div>
                     </div>
-                    <div class="col-sm-3 mb-3">
-                        <div class="card text-center bg-light">
-                            <div class="card-body">
-                                <i class="bi bi-hourglass-split fs-2 text-warning"></i>
-                                <h5 class="card-title">Transaksi Tertunda</h5>
-                                <p class="card-text">{{ $totalPending }}</p>
-                            </div>
+                </div>
+                <div class="col-sm-3 mb-3">
+                    <div class="card text-center bg-light">
+                        <div class="card-body">
+                            <i class="bi bi-hourglass-split fs-2 text-warning"></i>
+                            <h5 class="card-title">Transaksi Tertunda</h5>
+                            <p class="card-text">{{ $totalPending }}</p>
                         </div>
                     </div>
-                    <div class="col-sm-3 mb-3">
-                        <div class="card text-center bg-light">
-                            <div class="card-body">
-                                <i class="bi bi-x-circle fs-2 text-danger"></i>
-                                <h5 class="card-title">Transaksi Digagalkan</h5>
-                                <p class="card-text">{{ $totalCancelled }}</p>
-                            </div>
+                </div>
+                <div class="col-sm-3 mb-3">
+                    <div class="card text-center bg-light">
+                        <div class="card-body">
+                            <i class="bi bi-x-circle fs-2 text-danger"></i>
+                            <h5 class="card-title">Transaksi Digagalkan</h5>
+                            <p class="card-text">{{ $totalCancelled }}</p>
                         </div>
                     </div>
                 </div>
