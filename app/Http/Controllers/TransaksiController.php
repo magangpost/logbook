@@ -10,11 +10,25 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class TransaksiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $transaksi = Transaksi::paginate(20);
+        $search_param = $request->query('search_param');
+
+        if ($search_param) {
+            // Menggunakan paginate untuk paginasi hasil pencarian
+            $transaksi = Transaksi::search($search_param)->paginate(20);
+        } else {
+            // Menggunakan paginate untuk paginasi hasil default
+            $transaksi = Transaksi::paginate(20);
+        }
+
         $jumlahTransaksi = Transaksi::count();
-        return view('transaksi.index', ['transaksi' => $transaksi], ['jumlahTransaksi' => $jumlahTransaksi]);
+        
+        return view('transaksi.index', [
+            'transaksi' => $transaksi,
+            'jumlahTransaksi' => $jumlahTransaksi,
+            'search_param' => $search_param
+        ]);
     }
 
     public function create()
@@ -130,13 +144,18 @@ class TransaksiController extends Controller
         return redirect()->route('transaksi.index');
     }
 
-    public function export_excel()
+    public function exportExcel(Request $request)
     {
-        return Excel::download(new ExportTransaksi, 'transaksi.xlsx');
+        $search_param = $request->query('search_param');
+
+        return Excel::download(new ExportTransaksi($search_param), 'transaksi.xlsx');
     }
 
-    public function export_csv()
+    public function export_csv(Request $request)
     {
-        return Excel::download(new ExportTransaksi, 'transaksi.csv', \Maatwebsite\Excel\Excel::CSV);
+        $search_param = $request->query('search_param');
+
+        return Excel::download(new ExportTransaksi($search_param), 'transaksi.csv', \Maatwebsite\Excel\Excel::CSV);
     }
+
 }

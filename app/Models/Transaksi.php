@@ -5,10 +5,12 @@ namespace App\Models;
 use MongoDB\Laravel\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Scout\Searchable;
+use Laravel\Scout\Attributes\SearchUsingPrefix;
 
 class Transaksi extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
     protected $connection = 'mongodb';
     protected $table = 'transaksi';
 
@@ -20,4 +22,13 @@ class Transaksi extends Model
         'status_sla', 'zonecode', 'kprktujuan', 'nilaibarang', 'noref',
         'kodepelanggan', 'nilaicod', 'va', 'nopendkirim', 'beratvoulume'
     ];
+
+    #[SearchUsingPrefix(['kodepelanggan', ''])]
+    public function toSearchableArray(): array
+    {
+        return [
+            'kodepelanggan' => $this->kodepelanggan,
+            'tanggal_kirim' => $this->tanggal_terima,
+        ];
+    }
 }

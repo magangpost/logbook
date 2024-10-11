@@ -45,8 +45,6 @@ class TransaksiFactory extends Factory
             'va' => $this->faker->numberBetween(100000, 999999),
             'nopendkirim' => $this->faker->numberBetween(10000, 99999),
             'beratvoulume' => $this->faker->randomFloat(2, 0.1, 10),
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }

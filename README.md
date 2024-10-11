@@ -11,6 +11,10 @@ npm run dev
 
 composer require maatwebsite/excel --ignore-platform-reqs
 php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
+composer require algolia/algoliasearch-client-php --ignore-platform-reqs
+
+composer require laravel/scout --ignore-platform-reqs
+php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
 
 version:
 

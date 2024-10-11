@@ -9,12 +9,20 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class ExportTransaksi implements FromCollection, WithHeadings, WithMapping
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+    protected $search_param;
+
+    public function __construct($search_param = null)
+    {
+        $this->search_param = $search_param;
+    }
+
     public function collection()
     {
-        return Transaksi::all();
+        if ($this->search_param) {
+            return Transaksi::search($this->search_param)->get();
+        } else {
+            return Transaksi::all();
+        }
     }
 
     public function headings(): array
