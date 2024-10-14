@@ -25,4 +25,7 @@ php 3.8.12
 pecl mongodb 1.20.0 for Windows
 sass 1.77.6
 
+php artisan tinker
+Transaksi::factory()->count(10000)->create()
+
 services.msc
