@@ -27,5 +27,8 @@ sass 1.77.6
 
 php artisan tinker
 Transaksi::factory()->count(10000)->create()
+for ($i = 0; $i < 50000; $i += 1000) {
+    Transaksi::factory()->count(1000)->create();
+}
 
 services.msc
