@@ -49,7 +49,6 @@
                 <a href="{{ route('transaksi.export_excel', ['kodepelanggan' => request('kodepelanggan'), 'tanggal_kirim' => request('tanggal_kirim'), 'tanggal_terima' => request('tanggal_terima')]) }}" class="btn btn-primary mb-3">Export to Excel</a>
                 <a href="{{ route('transaksi.export_csv', ['kodepelanggan' => request('kodepelanggan'), 'tanggal_kirim' => request('tanggal_kirim'), 'tanggal_terima' => request('tanggal_terima')]) }}" class="btn btn-info mb-3">Export to CSV</a>
                 <form method="GET" action="{{ route('transaksi.index') }}" class="mb-3">
-                    <input type="text" name="kodepelanggan" placeholder="Cari Transaksi" value="{{ request('kodepelanggan') }}" class="form-control" style="display:inline-block; width:auto;">
                     <input type="date" name="tanggal_kirim" value="{{ request('tanggal_kirim') }}" class="form-control" style="display:inline-block; width:auto;" placeholder="Tanggal Kirim">
                     <input type="date" name="tanggal_terima" value="{{ request('tanggal_terima') }}" class="form-control" style="display:inline-block; width:auto;" placeholder="Tanggal Terima">
                     <button type="submit" class="btn btn-primary">Cari</button>

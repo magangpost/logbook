@@ -7,12 +7,13 @@ use App\Models\Transaksi;
 use Illuminate\Support\Facades\Validator;
 use App\Exports\ExportTransaksi;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
     public function index(Request $request)
     {
-        $kodepelanggan = $request->query('kodepelanggan');
+        $kodepelanggan = Auth::user()->kodepelanggan;
         $tanggal_kirim = $request->query('tanggal_kirim');
         $tanggal_terima = $request->query('tanggal_terima');
 
@@ -28,8 +29,6 @@ class TransaksiController extends Controller
         }
 
         $transaksi = $query->paginate(20)->withQueryString();
-
-        $transaksi = $query->paginate(20);
 
         $totalDelivered = Transaksi::where('status', 'DELIVERED')->count();
         $totalPending = Transaksi::where('status', 'PENDING')->count();
@@ -164,7 +163,7 @@ class TransaksiController extends Controller
 
     public function export_excel(Request $request)
     {
-        $kodepelanggan = $request->query('kodepelanggan');
+        $kodepelanggan = Auth::user()->kodepelanggan;
         $tanggal_kirim = $request->query('tanggal_kirim');
         $tanggal_terima = $request->query('tanggal_terima');
 
@@ -173,7 +172,7 @@ class TransaksiController extends Controller
 
     public function export_csv(Request $request)
     {
-        $kodepelanggan = $request->query('kodepelanggan');
+        $kodepelanggan = Auth::user()->kodepelanggan;
         $tanggal_kirim = $request->query('tanggal_kirim');
         $tanggal_terima = $request->query('tanggal_terima');
 
