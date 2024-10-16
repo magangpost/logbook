@@ -41,11 +41,41 @@ class TransaksiFactory extends Factory
             'kprktujuan' => $this->faker->numberBetween(10000, 99999),
             'nilaibarang' => $this->faker->numberBetween(1, 10),
             'noref' => $this->faker->numberBetween(10000000, 99999999),
-            'kodepelanggan' => $this->faker->word,
+            'kodepelanggan' => $this->faker->randomElement(['RTUCOMMERCE', 'IBRMCOMMERCE', 'ISNTCOMMERCE', 'MRJUCOMMERCE', 'ABRCOMMERCE']),
             'nilaicod' => $this->faker->numberBetween(10000, 99999),
             'va' => $this->faker->numberBetween(100000, 999999),
             'nopendkirim' => $this->faker->numberBetween(10000, 99999),
             'beratvoulume' => $this->faker->randomFloat(2, 0.1, 10),
+            'lacak' => $this->generateLacak(3)
         ];
+    }
+
+    private function generateLacak(int $count): array
+    {
+        $lacak = [];
+
+        for ($i = $count; $i > 0; $i--) {
+            $status = '';
+            switch ($i) {
+                case 1:
+                    $status = 'PACKAGING';
+                    break;
+                case 2:
+                    $status = 'ON DELIVER';
+                    break;
+                case 3:
+                    $status = 'DELIVERED';
+                    break;
+            }
+
+            $lacak[] = [
+                'id_lacak' => $i,
+                'waktu' => $this->faker->dateTimeThisYear()->format('M-d-Y h:i A'),
+                'status' => $status,
+                'deskripsi' => $this->faker->words(5, true),
+            ];
+        }
+
+        return $lacak;
     }
 }
