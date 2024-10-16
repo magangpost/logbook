@@ -80,37 +80,45 @@
             </div>
         </nav>
         
-        <div>
-          <div class="sidebar p-4 bg-secondary" id="sidebar">
-            <h4 class="mb-5 text-white">{{ config('app.name', 'Logbook') }}</h4>
-            <li>
-              <a class="text-white" href="{{ route('home') }}">
-                <i class="bi bi-house mr-2"></i>
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="{{ route('users.index') }}">
-              <i class="bi bi-person-lines-fill"></i>
-                Users
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="{{ route('transaksi.index') }}">
-                <i class="bi bi-bag-check"></i>
-                Transaction
-              </a>
-            </li>
-          </div>
-        </div>
+        @if(!request()->is('login') && !request()->is('register'))
+            <div>
+                <div class="sidebar p-4 bg-secondary" id="sidebar">
+                    <h4 class="mb-5 text-white">{{ config('app.name', 'Logbook') }}</h4>
+                    <li>
+                    <a class="text-white" href="{{ route('home') }}">
+                        <i class="bi bi-house mr-2"></i>
+                        Dashboard
+                    </a>
+                    </li>
+                    <li>
+                    <a class="text-white" href="{{ route('users.index') }}">
+                    <i class="bi bi-person-lines-fill"></i>
+                        Users
+                    </a>
+                    </li>
+                    <li>
+                    <a class="text-white" href="{{ route('transaksi.index') }}">
+                        <i class="bi bi-bag-check"></i>
+                        Transaction
+                    </a>
+                    </li>
+                </div>
+            </div>
+            <div class="p-4" id="main-content">
+                <button class="btn btn-secondary" id="button-toggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                <main id="main-content" class="py-4">
+                @yield('content')
+                </main>
+            </div>
+        @else
         <div class="p-4" id="main-content">
-            <button class="btn btn-secondary" id="button-toggle">
-                <i class="bi bi-list"></i>
-            </button>
-            <main id="main-content" class="py-4">
-            @yield('content')
-        </main>
-        </div>
+                <main id="main-content" class="py-4">
+                @yield('content')
+                </main>
+            </div>
+        @endif
     </div>
 </body>
 </html>
