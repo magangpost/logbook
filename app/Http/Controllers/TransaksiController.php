@@ -13,12 +13,6 @@ class TransaksiController extends Controller
 {
     public function index(Request $request)
     {
-        $totalDelivered = Transaksi::where('status', 'DELIVERED')->count();
-        $totalPending = Transaksi::where('status', 'PENDING')->count();
-        $totalCancelled = Transaksi::where('status', 'CANCELLED')->count();
-        
-        $jumlahTransaksi = Transaksi::count();
-        
         $kodepelanggan = Auth::user()->kodepelanggan;
         $tanggal_kirim = $request->query('tanggal_kirim');
         $tanggal_terima = $request->query('tanggal_terima');
@@ -31,10 +25,10 @@ class TransaksiController extends Controller
             $transaksi = collect();
             return view('transaksi.index', [
                 'transaksi' => $transaksi,
-                'jumlahTransaksi' => $jumlahTransaksi,
-                'totalDelivered' => $totalDelivered,
-                'totalPending' => $totalPending,
-                'totalCancelled' => $totalCancelled,
+                'jumlahTransaksi' => 0,
+                'totalDelivered' => 0,
+                'totalPending' => 0,
+                'totalCancelled' => 0,
                 'kodepelanggan' => $kodepelanggan,
                 'tanggal_kirim' => $tanggal_kirim,
                 'tanggal_terima' => $tanggal_terima,
@@ -43,20 +37,26 @@ class TransaksiController extends Controller
 
         if ($tanggal_kirim && $tanggal_terima) {
             $query->whereBetween('tanggal_kirim', [$tanggal_kirim, $tanggal_terima])
-                  ->whereBetween('tanggal_terima', [$tanggal_kirim, $tanggal_terima]);
+                ->whereBetween('tanggal_terima', [$tanggal_kirim, $tanggal_terima]);
         } else {
             $transaksi = collect();
             return view('transaksi.index', [
                 'transaksi' => $transaksi,
-                'jumlahTransaksi' => $jumlahTransaksi,
-                'totalDelivered' => $totalDelivered,
-                'totalPending' => $totalPending,
-                'totalCancelled' => $totalCancelled,
+                'jumlahTransaksi' => 0,
+                'totalDelivered' => 0,
+                'totalPending' => 0,
+                'totalCancelled' => 0,
                 'kodepelanggan' => $kodepelanggan,
                 'tanggal_kirim' => $tanggal_kirim,
                 'tanggal_terima' => $tanggal_terima,
             ]);
         }
+
+        // Clone the query to use it for counting without affecting the main query
+        $jumlahTransaksi = (clone $query)->count();
+        $totalDelivered = (clone $query)->where('status', 'DELIVERED')->count();
+        $totalPending = (clone $query)->where('status', 'PENDING')->count();
+        $totalCancelled = (clone $query)->where('status', 'CANCELLED')->count();
 
         $transaksi = $query->paginate(20)->withQueryString();
         
