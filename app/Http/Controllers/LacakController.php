@@ -28,7 +28,14 @@ class LacakController extends Controller
             return redirect()->route('lacak.index')->with('error', 'Unauthorized access to transaction data.');
         }
         
-        $transaksi->lacak = collect($transaksi->lacak)->sortByDesc('id_lacak')->values()->toArray();
+        $transaksi->lacak = collect($transaksi->lacak)->map(function ($item) {
+            $item['waktu'] = \DateTime::createFromFormat('M j h:i A', $item['waktu']);
+            return $item;
+        })->sortByDesc('waktu')->values()->map(function ($item) {
+            // Convert 'waktu' back to the desired format after sorting
+            $item['waktu'] = $item['waktu']->format('M j h:i A');
+            return $item;
+        })->toArray();
         
         return view('lacak.show', ['transaksi' => $transaksi]);
     }
