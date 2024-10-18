@@ -14,6 +14,27 @@ class TransaksiFactory extends Factory
     public function definition(): array
     {
         $tanggalKirim = $this->faker->dateTimeThisYear();
+
+        $trackingStatuses = [
+            'PACKAGING',
+            'ON DELIVER',
+            'DELIVERED',
+        ];
+        $lacak = array_map(function ($status, $index) use ($tanggalKirim) {
+            $waktu = (clone $tanggalKirim)->modify("+{$index} month");
+            $deskripsi = match ($status) {
+                'PACKAGING' => 'Paket sedang dikemas',
+                'ON DELIVER' => 'Paket sedang dikirim',
+                'DELIVERED' => 'Paket telah diterima',
+                default => 'Status tidak dikenal',
+            };
+            return [
+                'waktu' => $waktu->format('M j g:i A'),
+                'status' => $status,
+                'deskripsi' => $deskripsi,
+            ];
+        }, $trackingStatuses, array_keys($trackingStatuses));
+
         return [
             'no_resi' => $this->faker->regexify('[A-Z0-9]{10}'),
             'layanan' => $this->faker->randomElement(['PE', 'REG', 'YES']),
@@ -32,7 +53,7 @@ class TransaksiFactory extends Factory
             'htnb' => $this->faker->randomElement(['kosong', 'diisi']),
             'jumlah' => $this->faker->numberBetween(1000, 50000),
             'tanggal_kirim' => $tanggalKirim->format('Y-m-d'),
-            'tanggal_terima' => $this->faker->dateTimeBetween($tanggalKirim, '+1 week')->format('Y-m-d'),
+            'tanggal_terima' => (clone $tanggalKirim)->modify("+2 month")->format('Y-m-d'),
             'status' => $this->faker->randomElement(['DELIVERED', 'PENDING', 'CANCELLED']),
             'sla' => $this->faker->numberBetween(1, 5),
             'aktual_sla' => $this->faker->numberBetween(1, 5),
@@ -46,36 +67,7 @@ class TransaksiFactory extends Factory
             'va' => $this->faker->numberBetween(100000, 999999),
             'nopendkirim' => $this->faker->numberBetween(10000, 99999),
             'beratvoulume' => $this->faker->randomFloat(2, 0.1, 10),
-            'lacak' => $this->generateLacak(3)
+            'lacak' => $lacak
         ];
-    }
-
-    private function generateLacak(int $count): array
-    {
-        $lacak = [];
-
-        for ($i = $count; $i > 0; $i--) {
-            $status = '';
-            switch ($i) {
-                case 1:
-                    $status = 'PACKAGING';
-                    break;
-                case 2:
-                    $status = 'ON DELIVER';
-                    break;
-                case 3:
-                    $status = 'DELIVERED';
-                    break;
-            }
-
-            $lacak[] = [
-                'id_lacak' => $i,
-                'waktu' => $this->faker->dateTimeThisYear()->format('M-d-Y h:i A'),
-                'status' => $status,
-                'deskripsi' => $this->faker->words(5, true),
-            ];
-        }
-
-        return $lacak;
     }
 }
