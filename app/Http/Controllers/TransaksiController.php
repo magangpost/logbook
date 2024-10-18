@@ -27,6 +27,18 @@ class TransaksiController extends Controller
 
         if ($kodepelanggan) {
             $query->where('kodepelanggan', 'like', '%' . $kodepelanggan . '%');
+        } else {
+            $transaksi = collect();
+            return view('transaksi.index', [
+                'transaksi' => $transaksi,
+                'jumlahTransaksi' => $jumlahTransaksi,
+                'totalDelivered' => $totalDelivered,
+                'totalPending' => $totalPending,
+                'totalCancelled' => $totalCancelled,
+                'kodepelanggan' => $kodepelanggan,
+                'tanggal_kirim' => $tanggal_kirim,
+                'tanggal_terima' => $tanggal_terima,
+            ]);
         }
 
         if ($tanggal_kirim && $tanggal_terima) {
