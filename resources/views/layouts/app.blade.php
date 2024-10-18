@@ -84,27 +84,27 @@
             <div>
                 <div class="sidebar p-4 bg-secondary" id="sidebar">
                     <h4 class="mb-5 text-white">{{ config('app.name', 'Logbook') }}</h4>
-                    <li>
-                        <a class="text-white" href="{{ route('home') }}">
-                            <i class="bi bi-house mr-2"></i>
+                    <li class="mb-2">
+                        <a class="text-white fs-5" href="{{ route('home') }}">
+                            <i class="bi bi-house mr-2 fs-5"></i>
                             Dashboard
                         </a>
                     </li>
-                    <li>
-                        <a class="text-white" href="{{ route('users.index') }}">
-                        <i class="bi bi-person-lines-fill"></i>
+                    <li class="mb-2">
+                        <a class="text-white fs-5" href="{{ route('users.index') }}">
+                        <i class="bi bi-person-lines-fill fs-5"></i>
                             Users
                         </a>
                     </li>
-                    <li>
-                        <a class="text-white" href="{{ route('transaksi.index') }}">
-                            <i class="bi bi-bag-check"></i>
+                    <li class="mb-2">
+                        <a class="text-white fs-5" href="{{ route('transaksi.index') }}">
+                            <i class="bi bi-bag-check fs-5"></i>
                             Transaction
                         </a>
                     </li>
-                    <li>
-                        <a class="text-white" href="{{ route('lacak.index') }}">
-                            <i class="bi bi-search"></i>
+                    <li class="mb-2">
+                        <a class="text-white fs-5" href="{{ route('lacak.index') }}">
+                            <i class="bi bi-search fs-5"></i>
                             Lacak
                         </a>
                     </li>
