@@ -21,6 +21,5 @@ class AdminMiddleware
         }
 
         return redirect('home')->with('error','You have not admin access');
-      // It will redirect user back to home screen if they do not have admin=1 assigned in database
     }
 }

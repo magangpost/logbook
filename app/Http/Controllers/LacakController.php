@@ -32,7 +32,6 @@ class LacakController extends Controller
             $item['waktu'] = \DateTime::createFromFormat('M j h:i A', $item['waktu']);
             return $item;
         })->sortByDesc('waktu')->values()->map(function ($item) {
-            // Convert 'waktu' back to the desired format after sorting
             $item['waktu'] = $item['waktu']->format('M j h:i A');
             return $item;
         })->toArray();

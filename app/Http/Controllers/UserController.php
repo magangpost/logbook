@@ -22,10 +22,9 @@ class UserController extends Controller
         ]);
     }
 
-    // Metode baru untuk mengambil semua pengguna
     public function index()
     {
-        $users = User::all(); // Mengambil semua data pengguna dari database
+        $users = User::all();
 
         return view('users.index', ['users' => $users]);
     }

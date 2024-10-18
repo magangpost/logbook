@@ -52,7 +52,6 @@ class TransaksiController extends Controller
             ]);
         }
 
-        // Clone the query to use it for counting without affecting the main query
         $jumlahTransaksi = (clone $query)->count();
         $totalDelivered = (clone $query)->where('status', 'DELIVERED')->count();
         $totalPending = (clone $query)->where('status', 'PENDING')->count();
