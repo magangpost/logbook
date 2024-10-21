@@ -69,6 +69,7 @@ class TransaksiFactory extends Factory
                 'connote_receiver_zipcode' => $this->faker->postcode,
                 'actual_weight' => $this->faker->randomFloat(2, 0.1, 10),
                 'connote_service_price' => $this->faker->numberBetween(1000, 50000),
+                'surcharge_amount' => $this->faker->numberBetween(1000, 50000),
                 'connote_amount' => $this->faker->numberBetween(1000, 50000),
                 'created_at' => $tanggalKirim->format('Y-m-d'),
                 'updated_at' => (clone $tanggalKirim)->modify("+1 month")->format('Y-m-d'),
@@ -117,7 +118,7 @@ class TransaksiFactory extends Factory
                 ],
             ],
             'custom_field' => [
-                'nokprk' => $this->faker->numberBetween(10000, 99999),
+                'nokprk' => $this->faker->randomElement([1000, 2000, 3000, 4000, 5000]),
                 'nopen' => $this->faker->numberBetween(10000, 99999),
                 'ppn' => $this->faker->numberBetween(0, 10),
                 'final_swp' => $this->faker->randomElement([
