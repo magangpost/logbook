@@ -14,13 +14,16 @@ class TransaksiController extends Controller
     public function index(Request $request)
     {
         $kodepelanggan = Auth::user()->kodepelanggan;
+        $nokprk = Auth::user()->nokprk;
         $tanggal_kirim = $request->query('tanggal_kirim');
         $tanggal_terima = $request->query('tanggal_terima');
 
         $query = Transaksi::query();
 
         if ($kodepelanggan) {
-            $query->where('kodepelanggan', 'like', '%' . $kodepelanggan . '%');
+            $query->where('customer_code', 'like', '%' . $kodepelanggan . '%');
+        } elseif ($nokprk) {
+            $query->where('custom_field->nopen', 'like', '%' . $nokprk . '%');
         } else {
             $transaksi = collect();
             return view('transaksi.index', [
@@ -29,6 +32,17 @@ class TransaksiController extends Controller
                 'totalDelivered' => 0,
                 'totalPending' => 0,
                 'totalCancelled' => 0,
+                'totalReturn' => 0,
+                'totalInLocation' => 0,
+                'totalDeliveryRunSheet' => 0,
+                'totalUnBag' => 0,
+                'totalInVehicle' => 0,
+                'totalPaid' => 0,
+                'totalInBag' => 0,
+                'totalOnProcess' => 0,
+                'totalFailedToDelivered' => 0,
+                'totalIrregularity' => 0,
+                'totalPicked' => 0,
                 'kodepelanggan' => $kodepelanggan,
                 'tanggal_kirim' => $tanggal_kirim,
                 'tanggal_terima' => $tanggal_terima,
@@ -36,35 +50,48 @@ class TransaksiController extends Controller
         }
 
         if ($tanggal_kirim && $tanggal_terima) {
-            $query->whereBetween('tanggal_kirim', [$tanggal_kirim, $tanggal_terima])
-                ->whereBetween('tanggal_terima', [$tanggal_kirim, $tanggal_terima]);
-        } else {
-            $transaksi = collect();
-            return view('transaksi.index', [
-                'transaksi' => $transaksi,
-                'jumlahTransaksi' => 0,
-                'totalDelivered' => 0,
-                'totalPending' => 0,
-                'totalCancelled' => 0,
-                'kodepelanggan' => $kodepelanggan,
-                'tanggal_kirim' => $tanggal_kirim,
-                'tanggal_terima' => $tanggal_terima,
-            ]);
+            $query->whereBetween('connote->created_at', [$tanggal_kirim, $tanggal_terima])
+                ->whereBetween('connote->updated_at', [$tanggal_kirim, $tanggal_terima]);
         }
-
-        $jumlahTransaksi = (clone $query)->count();
-        $totalDelivered = (clone $query)->where('status', 'DELIVERED')->count();
-        $totalPending = (clone $query)->where('status', 'PENDING')->count();
-        $totalCancelled = (clone $query)->where('status', 'CANCELLED')->count();
 
         $transaksi = $query->paginate(20)->withQueryString();
         
+        $jumlahTransaksi = (clone $query)->count();
+
+        $statusCounts = [
+            'DELIVERED' => (clone $query)->where('connote->connote_state', 'DELIVERED')->count(),
+            'CANCEL' => (clone $query)->where('connote->connote_state', 'CANCEL')->count(),
+            'DELIVERED (RETURN DELIVERY)' => (clone $query)->where('connote->connote_state', 'DELIVERED (RETURN DELIVERY)')->count(),
+            'INLOCATION' => (clone $query)->where('connote->connote_state', 'INLOCATION')->count(),
+            'DELIVERYRUNSHEET' => (clone $query)->where('connote->connote_state', 'DELIVERYRUNSHEET')->count(),
+            'unBag' => (clone $query)->where('connote->connote_state', 'unBag')->count(),
+            'INVEHICLE' => (clone $query)->where('connote->connote_state', 'INVEHICLE')->count(),
+            'PAID' => (clone $query)->where('connote->connote_state', 'PAID')->count(),
+            'inBag' => (clone $query)->where('connote->connote_state', 'inBag')->count(),
+            'ON PROCESS' => (clone $query)->where('connote->connote_state', 'ON PROCESS')->count(),
+            'FAILEDTODELIVERED' => (clone $query)->where('connote->connote_state', 'FAILEDTODELIVERED')->count(),
+            'Irregularity' => (clone $query)->where('connote->connote_state', 'Irregularity')->count(),
+            'PENDING' => (clone $query)->where('connote->connote_state', 'PENDING')->count(),
+            'PICKED' => (clone $query)->where('connote->connote_state', 'PICKED')->count(),
+        ];
+
         return view('transaksi.index', [
             'transaksi' => $transaksi,
             'jumlahTransaksi' => $jumlahTransaksi,
-            'totalDelivered' => $totalDelivered,
-            'totalPending' => $totalPending,
-            'totalCancelled' => $totalCancelled,
+            'totalDelivered' => $statusCounts['DELIVERED'],
+            'totalPending' => $statusCounts['PENDING'],
+            'totalCancelled' => $statusCounts['CANCEL'],
+            'totalReturn' => $statusCounts['DELIVERED (RETURN DELIVERY)'],
+            'totalInLocation' => $statusCounts['INLOCATION'],
+            'totalDeliveryRunSheet' => $statusCounts['DELIVERYRUNSHEET'],
+            'totalUnBag' => $statusCounts['unBag'],
+            'totalInVehicle' => $statusCounts['INVEHICLE'],
+            'totalPaid' => $statusCounts['PAID'],
+            'totalInBag' => $statusCounts['inBag'],
+            'totalOnProcess' => $statusCounts['ON PROCESS'],
+            'totalFailedToDelivered' => $statusCounts['FAILEDTODELIVERED'],
+            'totalIrregularity' => $statusCounts['Irregularity'],
+            'totalPicked' => $statusCounts['PICKED'],
             'kodepelanggan' => $kodepelanggan,
             'tanggal_kirim' => $tanggal_kirim,
             'tanggal_terima' => $tanggal_terima,
