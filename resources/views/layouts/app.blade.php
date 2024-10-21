@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Logbook') }}</title>
+    <title>{{ config('app.name', 'Dashboard') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Logbook') }}
+                    {{ config('app.name', 'Dashboard') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -83,7 +83,7 @@
         @if(!request()->is('login') && !request()->is('register'))
             <div>
                 <div class="sidebar p-4 bg-secondary" id="sidebar">
-                    <h4 class="mb-5 text-white">{{ config('app.name', 'Logbook') }}</h4>
+                    <h4 class="mb-5 text-white">{{ config('app.name', 'Dashboard') }}</h4>
                     <li class="mb-2">
                         <a class="text-white fs-5" href="{{ route('home') }}">
                             <i class="bi bi-house mr-2 fs-5"></i>

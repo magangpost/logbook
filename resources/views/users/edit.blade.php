@@ -62,21 +62,6 @@
                             </div>
                         </div>
 
-                        <div class="row mb-2 justify-content-end">
-                            <label for="admin" class="col-md-5 col-form-label text-md-start">{{ __('Admin') }}</label>
-
-                            <div class="col-md-6">
-                                <input type="hidden" name="admin" value="0">
-                                <input id="admin" type="checkbox" class="@error('admin') is-invalid @enderror" name="admin" value="true" {{ old('admin', $user->admin) ? 'checked' : '' }}>
-
-                                @error('admin')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
                         <div class="row mb-0 justify-content-end">
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-secondary float-end">

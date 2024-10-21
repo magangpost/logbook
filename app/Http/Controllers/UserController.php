@@ -42,7 +42,6 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
-            'admin' => ['nullable', 'boolean'],
         ]);
 
         $user = User::findOrFail($id);
@@ -52,7 +51,6 @@ class UserController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
-        $user->admin = filter_var($request->admin, FILTER_VALIDATE_BOOLEAN);
 
         $user->save();
         return redirect()->route('users.index');

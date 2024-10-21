@@ -18,13 +18,13 @@ class LacakController extends Controller
     {
         $kodepelanggan = Auth::user()->kodepelanggan;
         $no_resi = $request->query('no_resi');
-        $transaksi = Transaksi::where('no_resi', $no_resi)->first();
+        $transaksi = Transaksi::where('connote->connote_code', $no_resi)->first();
         
         if (!$transaksi) {
             return redirect()->route('lacak.index')->with('error', 'Transaction not found.');
         }
 
-        if ($transaksi->kodepelanggan !== $kodepelanggan) {
+        if ($transaksi->customer_code !== $kodepelanggan) {
             return redirect()->route('lacak.index')->with('error', 'Unauthorized access to transaction data.');
         }
         

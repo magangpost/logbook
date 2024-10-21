@@ -20,7 +20,6 @@ class User extends Authenticatable
         'password',
         'name',
         'role',
-        'admin',
     ];
 
     /**
@@ -32,4 +31,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function hasAnyRole(array $roles)
+    {
+        return in_array($this->role, $roles);
+    }
 }

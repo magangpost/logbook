@@ -78,3 +78,87 @@ a {
   font-size: 12px;
   color: #999;
 }
+
+.rowasd {
+  display: flex;               /* Use flexbox for alignment */
+  flex-wrap: wrap;            /* Allow wrapping to next line */
+  margin: 0 -5px;             /* Optional: Adjust margins */
+}
+
+.columnasd {
+  flex: 0 0 12.5%;            /* Allow 8 cards in a row */
+  padding: 10px 10px;            /* Padding around columns */
+}
+
+@media screen and (max-width: 600px) {
+  .columnasd {
+    flex: 0 0 100%;           /* Full width on small screens */
+    display: block;           /* Make each column a block */
+    margin-bottom: 20px;     /* Space between cards */
+  }
+}
+
+.cardasd {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  flex: 1;                   /* Allow cards to grow */
+  display: flex;             /* Use flexbox for the card */
+  flex-direction: column;    /* Stack content vertically */
+  justify-content: space-between; /* Ensure even spacing */
+}
+
+.unguuu {
+  background-color: #e6e6ff;
+}
+.biruu {
+  background-color: #cce6ff;
+}
+.pinkk {
+  background-color: #ffcce6;
+}
+.hijauu {
+  background-color: #ccffee;
+}
+.kuningg {
+  background-color: #ffffcc;
+}
+.maroonn {
+  background-color: #ff8080;
+}
+.orangee {
+  background-color: #ffdd99;
+}
+.birutuaa{
+  background-color:  #4da6ff;
+}
+.greennn {
+  background-color: #99ff99;
+}
+.goldd {
+  background-color: #aaaa55;
+}
+.greyyy {
+  background-color: #85adad;
+}
+.neoon {
+  background-color: #d9ff66;
+}
+.ungutuaa {
+  background-color: #bf80ff;
+}
+.redd {
+  background-color: #ff0000;
+}
+.biruudiamondd {
+  background-color: #4dd2ff;
+}
+
+
+
+
+/* Optional: Ensures that all cards are equal height in their row */
+.rowasd > .columnasd {
+  display: flex;
+  align-items: stretch;      /* Stretch to fill the height of the row */
+}

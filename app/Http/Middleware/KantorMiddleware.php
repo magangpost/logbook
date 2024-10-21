@@ -7,14 +7,14 @@ use Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class KantorMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (Auth::user() &&  Auth::user()->role == "admin") {
+        if (Auth::user() &&  Auth::user()->role == "kantor") {
              return $next($request);
         }
 
-        return redirect('home')->with('error','You have not admin access');
+        return redirect('home')->with('error','You have not kantor access');
     }
 }
