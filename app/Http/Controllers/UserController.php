@@ -41,7 +41,7 @@ class UserController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => ['nullable', 'string', 'min:8'],
         ]);
 
         $user = User::findOrFail($id);

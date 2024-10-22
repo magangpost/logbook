@@ -28,7 +28,7 @@ class TransaksiController extends Controller
                 }
         
                 if ($nokprk) {
-                    $query->where('custom_field->nokprk', 'like', '%' . $nokprk . '%');
+                    $query->where('custom_field->nokprk', (int)$nokprk);
                 }
 
                 if ($tanggal_kirim && $tanggal_terima) {
@@ -122,7 +122,7 @@ class TransaksiController extends Controller
                 $kodepelanggan = null;
                 $nokprk = Auth::user()->nokprk;
                 if ($nokprk) {
-                    $query->where('custom_field->nokprk', 'like', '%' . $nokprk . '%');
+                    $query->where('custom_field->nokprk', (int)$nokprk);
                 } else {
                     $transaksi = collect();
                     return view('transaksi.index', [
