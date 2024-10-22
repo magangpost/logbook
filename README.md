@@ -27,8 +27,13 @@ sass 1.77.6
 
 php artisan tinker
 Transaksi::factory()->count(10000)->create()
-for ($i = 0; $i < 50000; $i += 1000) {
+for ($i = 0; $i < 1000000; $i += 1000) {
     Transaksi::factory()->count(1000)->create();
 }
 
 services.msc
+
+max_execution_time = 60      ; Maximum execution time of each script, in seconds (I CHANGED THIS VALUE)
+max_input_time = 120          ; Maximum amount of time each script may spend parsing request data
+;max_input_nesting_level = 64 ; Maximum input variable nesting level
+memory_limit = 128M           ; Maximum amount of memory a script may consume (128MB by default)
