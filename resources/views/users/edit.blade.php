@@ -51,7 +51,7 @@
                             <label for="password" class="col-md-5 col-form-label text-md-start">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control " name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control " name="password" autocomplete="new-password">
                                 <small class="form-text text-danger">Kosongkan jika tidak ingin mengganti password</small>
                             </div>
                         </div>
