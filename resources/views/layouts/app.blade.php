@@ -88,7 +88,10 @@
         @if(!request()->is('login') && !request()->is('register'))
             <div>
                 <div class="sidebar p-4 bg-secondary" id="sidebar">
-                    <h4 class="mb-5 text-white">{{ config('app.name', 'Dashboard') }}</h4>
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="{{ asset('assets/img/favicon.png') }}" alt="Dashboard Icon" class="me-2" style="width: 24px; height: 24px;">
+                        <h4 class="mb-0 text-white">{{ config('app.name', 'Dashboard') }}</h4>
+                    </div>
                     <li class="mb-2">
                         <a class="text-white fs-5" href="{{ route('home') }}">
                             <i class="bi bi-house mr-2 fs-5"></i>
