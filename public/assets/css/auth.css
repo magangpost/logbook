@@ -162,3 +162,11 @@ a {
   display: flex;
   align-items: stretch;      /* Stretch to fill the height of the row */
 }
+
+/* CSS untuk favicon */
+.favicon {
+  width: 30px; /* Ukuran yang diinginkan */
+  height: 30px; /* Ukuran yang diinginkan */
+  border-radius: 50%; /* Membuat gambar bulat */
+  object-fit: cover; /* Memastikan gambar tidak pecah */
+}

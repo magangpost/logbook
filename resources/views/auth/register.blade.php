@@ -9,7 +9,7 @@
                 <div class="container-fluid h-custom">
                     <div class="row d-flex justify-content-center align-items-center h-100 ms-5">
                         <div class="col-md-9 col-lg-6 col-xl-3">
-                            <img src="{{asset('assets/img/profilposind.png')}}"
+                            <img src="{{asset('assets/img/logo.png')}}"
                             class="img-fluid" alt="Sample image">
                         </div>
                         <div class="col-md-8 col-lg-6 col-xl-7 offset-xl-1">
