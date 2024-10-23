@@ -31,7 +31,33 @@ a {
     position: fixed;
     margin-left: -300px;
     transition: 0.4s;
+    background-color: #4682B4; /* Tambahkan ini untuk warna biru tua */
 }
+
+/* CSS untuk Button Toggle */
+#button-toggle {
+  background-color: #4682B4; /* Warna Steel Blue */
+  color: white; /* Warna teks putih */
+  border: none; /* Hilangkan border */
+  padding: 10px 15px; /* Tambahkan padding agar button lebih besar */
+  border-radius: 4px; /* Border radius agar button terlihat lebih rapi */
+  cursor: pointer; /* Ubah kursor menjadi pointer saat hover */
+}
+
+/* Hover Effect untuk Button Toggle */
+#button-toggle:hover {
+  background-color: #5A9BD4; /* Warna biru yang lebih terang saat hover */
+  color: white; /* Warna teks tetap putih */
+}
+
+.card-header {
+  background-color: #4169E1 !important;  /* Warna Royal Blue */
+  color: white !important;               /* Warna teks putih */
+  padding: 10px;                         /* Padding agar lebih rapi */
+  font-weight: bold;                     /* Membuat teks tebal */
+  border-radius: 4px 4px 0 0;           /* Border radius untuk sudut yang rapi */
+}
+
 
 .active-main-content {
     margin-left: 250px;
@@ -45,10 +71,11 @@ a {
     transition: 0.4s;
 }
 
+
 .navbar {
+    background-color: #D3D3D3;
     height: 50px !important; /*i assume your navbar size 100px*/
 }
-
 
 
 
@@ -169,4 +196,11 @@ a {
   height: 30px; /* Ukuran yang diinginkan */
   border-radius: 50%; /* Membuat gambar bulat */
   object-fit: cover; /* Memastikan gambar tidak pecah */
+}
+
+.bg-dashboard {
+  background-color: #FFF8DC; /* Biru Tua, atau Anda bisa mengganti dengan warna lain */
+  min-height: 100vh; /* Agar latar belakang memenuhi tinggi viewport */
+  padding: 20px; /* Tambahkan padding jika perlu */
+  color: white; /* Mengatur warna teks menjadi putih agar kontras dengan latar belakang */
 }

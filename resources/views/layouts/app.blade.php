@@ -27,8 +27,8 @@
 </head>
 <body id="body-pd">
     <!--Container Main end-->
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div class = "bg-dashboard" id="app">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
              <div class="container">
              <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
              <img src="{{ asset('assets/img/favicon.png') }}" alt="Logo" class="favicon" style="margin-right: 10px;">
@@ -87,7 +87,7 @@
         
         @if(!request()->is('login') && !request()->is('register'))
             <div>
-                <div class="sidebar p-4 bg-secondary" id="sidebar">
+                 <div class="sidebar p-4 bg-Steel Blue" id="sidebar">
                     <div class="d-flex align-items-center mb-4">
                         <img src="{{ asset('assets/img/favicon.png') }}" alt="Dashboard Icon" class="me-2" style="width: 24px; height: 24px;">
                         <h4 class="mb-0 text-white">{{ config('app.name', 'Dashboard') }}</h4>
@@ -119,7 +119,7 @@
                 </div>
             </div>
             <div class="p-4" id="main-content">
-                <button class="btn btn-secondary" id="button-toggle">
+                <button class="btn btn-Steel Blue" id="button-toggle">
                     <i class="bi bi-list"></i>
                 </button>
                 <main id="main-content" class="py-4">
