@@ -246,28 +246,28 @@ class TransaksiController extends Controller
     }
 
     private function returnEmptyResponse($kodepelanggan, $nokprk, $tanggal_kirim, $tanggal_terima)
-{
-    return view('transaksi.index', [
-        'transaksi' => collect(),
-        'jumlahTransaksi' => 0,
-        'totalDelivered' => 0,
-        'totalPending' => 0,
-        'totalCancelled' => 0,
-        'totalReturn' => 0,
-        'totalInLocation' => 0,
-        'totalDeliveryRunSheet' => 0,
-        'totalUnBag' => 0,
-        'totalInVehicle' => 0,
-        'totalPaid' => 0,
-        'totalInBag' => 0,
-        'totalOnProcess' => 0,
-        'totalFailedToDelivered' => 0,
-        'totalIrregularity' => 0,
-        'totalPicked' => 0,
-        'kodepelanggan' => $kodepelanggan,
-        'nokprk' => $nokprk,
-        'tanggal_kirim' => $tanggal_kirim,
-        'tanggal_terima' => $tanggal_terima,
-    ]);
-}
+    {
+        return view('transaksi.index', [
+            'transaksi' => collect(),
+            'jumlahTransaksi' => 0,
+            'totalDelivered' => 0,
+            'totalPending' => 0,
+            'totalCancelled' => 0,
+            'totalReturn' => 0,
+            'totalInLocation' => 0,
+            'totalDeliveryRunSheet' => 0,
+            'totalUnBag' => 0,
+            'totalInVehicle' => 0,
+            'totalPaid' => 0,
+            'totalInBag' => 0,
+            'totalOnProcess' => 0,
+            'totalFailedToDelivered' => 0,
+            'totalIrregularity' => 0,
+            'totalPicked' => 0,
+            'kodepelanggan' => $kodepelanggan,
+            'nokprk' => $nokprk,
+            'tanggal_kirim' => $tanggal_kirim,
+            'tanggal_terima' => $tanggal_terima,
+        ]);
+    }
 }
