@@ -37,3 +37,27 @@ max_execution_time = 60      ; Maximum execution time of each script, in seconds
 max_input_time = 120          ; Maximum amount of time each script may spend parsing request data
 ;max_input_nesting_level = 64 ; Maximum input variable nesting level
 memory_limit = 128M           ; Maximum amount of memory a script may consume (128MB by default)
+
+db.transaksi.createIndex({
+  customer_code: 1,
+  'custom_field.nokprk': 1,
+  'connote.created_at': 1,
+  'connote.updated_at': 1
+})
+
+db.transaksi.createIndex({
+  customer_code: 1,
+  'connote.created_at': 1,
+  'connote.updated_at': 1
+})
+
+db.transaksi.createIndex({
+  'custom_field.nokprk': 1,
+  'connote.created_at': 1,
+  'connote.updated_at': 1
+})
+
+db.transaksi.createIndex({
+  'connote.created_at': 1,
+  'connote.updated_at': 1
+})
