@@ -31,7 +31,7 @@ a {
     position: fixed;
     margin-left: -300px;
     transition: 0.4s;
-    background-color: #4682B4; /* Tambahkan ini untuk warna biru tua */
+    background-color: #4682B4; 
 }
 
 /* CSS untuk Button Toggle */
@@ -204,3 +204,37 @@ a {
   padding: 20px; /* Tambahkan padding jika perlu */
   color: black; /* Mengatur warna teks menjadi putih agar kontras dengan latar belakang */
 }
+
+/* Card khusus untuk New Transaksi */
+.card-header {
+  background-color: #cfddb6; /* Warna Alice Blue */
+  border: 1px solid #4682B4; /* Border dengan warna Steel Blue */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow untuk efek 3D */
+  padding: 16px;
+  border-radius: 10px; /* Membulatkan sudut card */
+  color: #333; /* Warna teks */
+  text-align: center; /* Pusatkan teks */
+}
+
+#lacak_form {
+  display: flex;
+  justify-content: center; /* Agar input dan button berada di tengah */
+  gap: 10px; /* Jarak antara input dan button */
+}
+
+#no_resi {
+  border: 1px solid #4682B4; /* Border sesuai dengan warna Steel Blue */
+  border-radius: 5px; /* Membulatkan sedikit sudut input */
+  padding: 10px; /* Padding untuk input field */
+}
+
+.btn-primary {
+  background-color: #4682B4; /* Warna biru Steel Blue untuk button */
+  border-color: #4682B4; /* Sama dengan warna background button */
+}
+
+.btn-primary:hover {
+  background-color: #5A9BD4; /* Warna biru yang lebih terang saat hover */
+  border-color: #5A9BD4; /* Sama dengan warna hover background */
+}
+

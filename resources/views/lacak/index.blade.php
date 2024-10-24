@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container card-lacak">
     <div class="row justify-content-center">
         <div class="position-center">
             <div class="position-absolute top-50 start-50 translate-middle">
