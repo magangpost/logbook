@@ -41,6 +41,8 @@ class UserController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
+            'kodepelanggan' => ['nullable', 'string', 'max:255'],
+            'nokprk' => ['nullable', 'string', 'max:255'],
             'password' => ['nullable', 'string', 'min:8'],
         ]);
 
@@ -48,6 +50,12 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->name = $request->name;
         $user->role = $request->role;
+        if ($request->filled('kodepelanggan')) {
+            $user->kodepelanggan = $request->kodepelanggan;
+        }
+        if ($request->filled('nokprk')) {
+            $user->nokprk = $request->nokprk;
+        }
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }

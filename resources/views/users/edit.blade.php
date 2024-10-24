@@ -48,6 +48,34 @@
                         </div>
 
                         <div class="row mb-2 justify-content-end">
+                            <label for="kodepelanggan" class="col-md-5 col-form-label text-md-start">{{ __('Kode Pelanggan') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="kodepelanggan" type="text" class="form-control @error('kodepelanggan') is-invalid @enderror" name="kodepelanggan" value="{{ old('kodepelanggan', $user->kodepelanggan) }}" autocomplete="kodepelanggan" autofocus>
+
+                                @error('kodepelanggan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-2 justify-content-end">
+                            <label for="nokprk" class="col-md-5 col-form-label text-md-start">{{ __('No KPRK') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nokprk" type="text" class="form-control @error('nokprk') is-invalid @enderror" name="nokprk" value="{{ old('nokprk', $user->nokprk) }}" autocomplete="nokprk" autofocus>
+
+                                @error('nokprk')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-2 justify-content-end">
                             <label for="password" class="col-md-5 col-form-label text-md-start">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
