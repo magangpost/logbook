@@ -202,5 +202,5 @@ a {
   background-color: #FFF8DC; /* Biru Tua, atau Anda bisa mengganti dengan warna lain */
   min-height: 100vh; /* Agar latar belakang memenuhi tinggi viewport */
   padding: 20px; /* Tambahkan padding jika perlu */
-  color: white; /* Mengatur warna teks menjadi putih agar kontras dengan latar belakang */
+  color: black; /* Mengatur warna teks menjadi putih agar kontras dengan latar belakang */
 }
