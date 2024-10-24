@@ -89,7 +89,7 @@
             <div>
                  <div class="sidebar p-4 bg-Steel Blue" id="sidebar">
                     <div class="d-flex align-items-center mb-4">
-                        <img src="{{ asset('assets/img/favicon.png') }}" alt="Dashboard Icon" class="me-2" style="width: 24px; height: 24px;">
+                        <img src="{{ asset('assets/img/favicon.png') }}" alt="Dashboard Icon" class="me-2 rounded-circle" style="width: 24px; height: 24px;">
                         <h4 class="mb-0 text-white">{{ config('app.name', 'Dashboard') }}</h4>
                     </div>
                     <li class="mb-2">
