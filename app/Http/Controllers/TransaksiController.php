@@ -229,20 +229,44 @@ class TransaksiController extends Controller
 
     public function export_excel(Request $request)
     {
-        $kodepelanggan = Auth::user()->kodepelanggan;
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $kodepelanggan = $request->query('kodepelanggan');
+            $nokprk = $request->query('nokprk');
+        }
+        elseif ($role == 'pelanggan') {
+            $kodepelanggan = Auth::user()->kodepelanggan;
+            $nokprk = $request->query('nokprk');
+        }
+        elseif ($role == 'kantor') {
+            $kodepelanggan = $request->query('kodepelanggan');
+            $nokprk = Auth::user()->nokprk;
+        }
         $tanggal_kirim = $request->query('tanggal_kirim');
         $tanggal_terima = $request->query('tanggal_terima');
 
-        return Excel::download(new ExportTransaksi($kodepelanggan, $tanggal_kirim, $tanggal_terima), 'transaksi.xlsx');
+        return Excel::download(new ExportTransaksi($kodepelanggan, $nokprk, $tanggal_kirim, $tanggal_terima), 'transaksi.xlsx');
     }
 
     public function export_csv(Request $request)
     {
-        $kodepelanggan = Auth::user()->kodepelanggan;
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $kodepelanggan = $request->query('kodepelanggan');
+            $nokprk = $request->query('nokprk');
+        }
+        elseif ($role == 'pelanggan') {
+            $kodepelanggan = Auth::user()->kodepelanggan;
+            $nokprk = $request->query('nokprk');
+        }
+        elseif ($role == 'kantor') {
+            $kodepelanggan = $request->query('kodepelanggan');
+            $nokprk = Auth::user()->nokprk;
+        }
         $tanggal_kirim = $request->query('tanggal_kirim');
         $tanggal_terima = $request->query('tanggal_terima');
 
-        return Excel::download(new ExportTransaksi($kodepelanggan, $tanggal_kirim, $tanggal_terima), 'transaksi.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new ExportTransaksi($kodepelanggan, $nokprk, $tanggal_kirim, $tanggal_terima), 'transaksi.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
     private function returnEmptyResponse($kodepelanggan, $nokprk, $tanggal_kirim, $tanggal_terima)

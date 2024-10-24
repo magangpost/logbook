@@ -113,8 +113,8 @@
         <div class="card mb-3">
             <div class="card-body">
                 <a href="{{ route('transaksi.create') }}" class="btn btn-success mb-3">Create New Transaksi</a>
-                <a href="{{ route('transaksi.export_excel', ['kodepelanggan' => request('kodepelanggan'), 'tanggal_kirim' => request('tanggal_kirim'), 'tanggal_terima' => request('tanggal_terima')]) }}" class="btn btn-primary mb-3">Export to Excel</a>
-                <a href="{{ route('transaksi.export_csv', ['kodepelanggan' => request('kodepelanggan'), 'tanggal_kirim' => request('tanggal_kirim'), 'tanggal_terima' => request('tanggal_terima')]) }}" class="btn btn-info mb-3">Export to CSV</a>
+                <a href="{{ route('transaksi.export_excel', ['kodepelanggan' => request('kodepelanggan'), 'nokprk' => request('nokprk'), 'tanggal_kirim' => request('tanggal_kirim'), 'tanggal_terima' => request('tanggal_terima')]) }}" class="btn btn-primary mb-3">Export to Excel</a>
+                <a href="{{ route('transaksi.export_csv', ['kodepelanggan' => request('kodepelanggan'), 'nokprk' => request('nokprk'), 'tanggal_kirim' => request('tanggal_kirim'), 'tanggal_terima' => request('tanggal_terima')]) }}" class="btn btn-info mb-3">Export to CSV</a>
                 <form method="GET" action="{{ route('transaksi.index') }}" class="mb-3">
                     @if(Auth::user()->role == 'admin')
                         <input type="text" name="kodepelanggan" placeholder="Kode Pelanggan" value="{{ request('kodepelanggan') }}" class="form-control" style="display:inline-block; width:auto;">
