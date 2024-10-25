@@ -16,7 +16,10 @@ class TransaksiController extends Controller
         $role = Auth::user()->role;
         $tanggal_kirim = $request->query('tanggal_kirim');
         $tanggal_terima = $request->query('tanggal_terima');
+        $page = (int) $request->query('page', 1); // Default to page 1 if not set
+        $limit = (int) $request->query('limit', 10); // Default limit is 10
 
+        $offset = ($page - 1) * $limit;
         $query = Transaksi::query();
 
         if ($role == 'admin' || $role == 'pelanggan' || $role == 'kantor') {
@@ -68,48 +71,19 @@ class TransaksiController extends Controller
                     return $this->returnEmptyResponse(null, $nokprk, $tanggal_kirim, $tanggal_terima);
                 }
             }
-            $transaksi = $query->paginate(20)->withQueryString();
-        
-            $jumlahTransaksi = (clone $query)->count();
-
-            $statusCounts = [
-                'DELIVERED' => (clone $query)->where('connote->connote_state', 'DELIVERED')->count(),
-                'CANCEL' => (clone $query)->where('connote->connote_state', 'CANCEL')->count(),
-                'DELIVERED (RETURN DELIVERY)' => (clone $query)->where('connote->connote_state', 'DELIVERED (RETURN DELIVERY)')->count(),
-                'INLOCATION' => (clone $query)->where('connote->connote_state', 'INLOCATION')->count(),
-                'DELIVERYRUNSHEET' => (clone $query)->where('connote->connote_state', 'DELIVERYRUNSHEET')->count(),
-                'unBag' => (clone $query)->where('connote->connote_state', 'unBag')->count(),
-                'INVEHICLE' => (clone $query)->where('connote->connote_state', 'INVEHICLE')->count(),
-                'PAID' => (clone $query)->where('connote->connote_state', 'PAID')->count(),
-                'inBag' => (clone $query)->where('connote->connote_state', 'inBag')->count(),
-                'ON PROCESS' => (clone $query)->where('connote->connote_state', 'ON PROCESS')->count(),
-                'FAILEDTODELIVERED' => (clone $query)->where('connote->connote_state', 'FAILEDTODELIVERED')->count(),
-                'Irregularity' => (clone $query)->where('connote->connote_state', 'Irregularity')->count(),
-                'PENDING' => (clone $query)->where('connote->connote_state', 'PENDING')->count(),
-                'PICKED' => (clone $query)->where('connote->connote_state', 'PICKED')->count(),
-            ];
+            $totalRecords = $query->count();
+            $transaksi = $query->limit($limit)->offset($offset)->get();
+            $totalPages = ceil($totalRecords / $limit);
 
             return view('transaksi.index', [
                 'transaksi' => $transaksi,
-                'jumlahTransaksi' => $jumlahTransaksi,
-                'totalDelivered' => $statusCounts['DELIVERED'],
-                'totalPending' => $statusCounts['PENDING'],
-                'totalCancelled' => $statusCounts['CANCEL'],
-                'totalReturn' => $statusCounts['DELIVERED (RETURN DELIVERY)'],
-                'totalInLocation' => $statusCounts['INLOCATION'],
-                'totalDeliveryRunSheet' => $statusCounts['DELIVERYRUNSHEET'],
-                'totalUnBag' => $statusCounts['unBag'],
-                'totalInVehicle' => $statusCounts['INVEHICLE'],
-                'totalPaid' => $statusCounts['PAID'],
-                'totalInBag' => $statusCounts['inBag'],
-                'totalOnProcess' => $statusCounts['ON PROCESS'],
-                'totalFailedToDelivered' => $statusCounts['FAILEDTODELIVERED'],
-                'totalIrregularity' => $statusCounts['Irregularity'],
-                'totalPicked' => $statusCounts['PICKED'],
                 'kodepelanggan' => $kodepelanggan,
                 'nokprk' => $nokprk,
                 'tanggal_kirim' => $tanggal_kirim,
                 'tanggal_terima' => $tanggal_terima,
+                'currentPage' => $page,
+                'totalPages' => $totalPages,
+                'limit' => $limit,
             ]);
         }
     }
@@ -273,21 +247,6 @@ class TransaksiController extends Controller
     {
         return view('transaksi.index', [
             'transaksi' => collect(),
-            'jumlahTransaksi' => 0,
-            'totalDelivered' => 0,
-            'totalPending' => 0,
-            'totalCancelled' => 0,
-            'totalReturn' => 0,
-            'totalInLocation' => 0,
-            'totalDeliveryRunSheet' => 0,
-            'totalUnBag' => 0,
-            'totalInVehicle' => 0,
-            'totalPaid' => 0,
-            'totalInBag' => 0,
-            'totalOnProcess' => 0,
-            'totalFailedToDelivered' => 0,
-            'totalIrregularity' => 0,
-            'totalPicked' => 0,
             'kodepelanggan' => $kodepelanggan,
             'nokprk' => $nokprk,
             'tanggal_kirim' => $tanggal_kirim,

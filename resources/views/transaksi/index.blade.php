@@ -3,113 +3,6 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="rowasd">
-            <div class="columnasd">
-                <div class="cardasd unguuu">
-                    <i class="bi bi-list-check fs-2 text-success"></i>
-                    <h6 class="card-title">Total Transaksi</h6>
-                    <p class="card-text">{{ $jumlahTransaksi }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd biruu">
-                    <i class="bi bi-check-circle fs-2 text-primary"></i>
-                    <h6 class="card-title">Transaksi Terkirim</h6>
-                    <p class="card-text">{{ $totalDelivered }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd pinkk">
-                    <i class="bi bi-hourglass-split fs-2 text-warning"></i>
-                    <h6 class="card-title">Transaksi Tertunda</h6>
-                    <p class="card-text">{{ $totalPending }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd hijauu">
-                    <i class="bi bi-x-circle fs-2 text-danger"></i>
-                    <h6 class="card-title">Transaksi Digagalkan</h6>
-                    <p class="card-text">{{ $totalCancelled }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd kuningg">
-                    <i class="bi bi-arrow-return-right fs-2 text-info"></i>
-                    <h6 class="card-title">Transaksi Kembali</h6>
-                    <p class="card-text">{{ $totalReturn }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd maroonn">
-                    <i class="bi bi-people fs-2 text-secondary"></i>
-                    <h6 class="card-title">Transaksi Dalam Proses</h6>
-                    <p class="card-text">{{ $totalOnProcess }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd orangee">
-                    <i class="bi bi-bag fs-2 text-dark"></i>
-                    <h6 class="card-title">Transaksi Di Kendaraan</h6>
-                    <p class="card-text">{{ $totalInVehicle }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd birutuaa">
-                    <i class="bi bi-check-circle fs-2 text-success"></i>
-                    <h6 class="card-title">Transaksi Dibayar</h6>
-                    <p class="card-text">{{ $totalPaid }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd greennn">
-                    <i class="bi bi-exclamation-circle fs-2 text-warning"></i>
-                    <h6 class="card-title">Transaksi Irregularity</h6>
-                    <p class="card-text">{{ $totalIrregularity }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd goldd">
-                    <i class="bi bi-basket fs-2 text-info"></i>
-                    <h6 class="card-title">Transaksi Di Tas</h6>
-                    <p class="card-text">{{ $totalInBag }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd greyyy">
-                    <i class="bi bi-truck fs-2 text-primary"></i>
-                    <h6 class="card-title">Transaksi Dalam Pengiriman</h6>
-                    <p class="card-text">{{ $totalInLocation }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd neoon">
-                    <i class="bi bi-archive fs-2 text-dark"></i>
-                    <h6 class="card-title">Transaksi Dalam Penyimpanan</h6>
-                    <p class="card-text">{{ $totalDeliveryRunSheet }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd ungutuaa">
-                    <i class="bi bi-clock fs-2 text-secondary"></i>
-                    <h6 class="card-title">Transaksi Belum Terbayar</h6>
-                    <p class="card-text">{{ $totalUnBag }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd biruudiamondd">
-                    <i class="bi bi-exclamation-triangle fs-2 text-danger"></i>
-                    <h6 class="card-title">Transaksi Gagal Dikirim</h6>
-                    <p class="card-text">{{ $totalFailedToDelivered }}</p>
-                </div>
-            </div>
-            <div class="columnasd">
-                <div class="cardasd redd">
-                    <i class="bi bi-arrow-up-circle fs-2 text-primary"></i>
-                    <h6 class="card-title">Transaksi Diangkat</h6>
-                    <p class="card-text">{{ $totalPicked }}</p>
-                </div>
-            </div>
-        </div>
         <div class="card mb-3">
             <div class="card-body">
                 <a href="{{ route('transaksi.create') }}" class="btn btn-success mb-3">Create New Transaksi</a>
@@ -120,6 +13,7 @@
                         <input type="text" name="kodepelanggan" placeholder="Kode Pelanggan" value="{{ request('kodepelanggan') }}" class="form-control" style="display:inline-block; width:auto;">
                         <input type="text" name="nokprk" placeholder="No KPRK" value="{{ request('nokprk') }}" class="form-control" style="display:inline-block; width:auto;">
                     @endif
+                    <input type="number" name="limit" placeholder="Limit" value="{{ request('limit') }}" class="form-control" style="display:inline-block; width:auto;">
                     <input type="date" name="tanggal_kirim" value="{{ request('tanggal_kirim') }}" class="form-control" style="display:inline-block; width:auto;" placeholder="Tanggal Kirim">
                     <input type="date" name="tanggal_terima" value="{{ request('tanggal_terima') }}" class="form-control" style="display:inline-block; width:auto;" placeholder="Tanggal Terima">
                     <button type="submit" class="btn btn-primary">Cari</button>
@@ -215,7 +109,42 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $transaksi->appends(request()->query())->links() }}
+                    <div class="d-flex justify-content-center">
+                        <nav>
+                            <ul class="pagination">
+                                <!-- First Page Link -->
+                                @if ($currentPage > 1)
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ route('transaksi.index', array_merge(request()->except(['page']), ['page' => 1, 'limit' => $limit])) }}"><<</a>
+                                    </li>
+                                @endif
+
+                                <!-- Previous Page Link -->
+                                @if ($currentPage > 1)
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ route('transaksi.index', array_merge(request()->except(['page']), ['page' => $currentPage - 1, 'limit' => $limit])) }}"><</a>
+                                    </li>
+                                @endif
+
+                                <!-- Current Page Indicator -->
+                                <li class="page-item active"><span class="page-link">{{ $currentPage }}</span></li>
+
+                                <!-- Next Page Link -->
+                                @if ($currentPage < $totalPages)
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ route('transaksi.index', array_merge(request()->except(['page']), ['page' => $currentPage + 1, 'limit' => $limit])) }}">></a>
+                                    </li>
+                                @endif
+
+                                <!-- Last Page Link -->
+                                @if ($currentPage < $totalPages)
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ route('transaksi.index', array_merge(request()->except(['page']), ['page' => $totalPages, 'limit' => $limit])) }}">>></a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div>
                 @endif
             </div>
         </div>
