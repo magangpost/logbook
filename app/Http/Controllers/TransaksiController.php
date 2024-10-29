@@ -88,6 +88,83 @@ class TransaksiController extends Controller
         }
     }
 
+    public function index2(Request $request)
+    {
+        $role = Auth::user()->role;
+        $tanggal_kirim = $request->query('tanggal_kirim');
+        $tanggal_terima = $request->query('tanggal_terima');
+        $page = (int) $request->query('page', 1); // Default to page 1 if not set
+        $limit = (int) $request->query('limit', 10); // Default limit is 10
+
+        $offset = ($page - 1) * $limit;
+        $query = Transaksi::query();
+
+        if ($role == 'admin' || $role == 'pelanggan' || $role == 'kantor') {
+            if ($role == 'admin') {
+                $kodepelanggan = $request->query('kodepelanggan');
+                $nokprk = $request->query('nokprk');
+                if ($kodepelanggan) {
+                    $query->where('customer_code', 'like', '%' . $kodepelanggan . '%');
+                }
+        
+                if ($nokprk) {
+                    $query->where('custom_field->nokprk', (int)$nokprk);
+                }
+
+                if ($tanggal_kirim && $tanggal_terima) {
+                    $query->whereBetween('connote->created_at', [$tanggal_kirim, $tanggal_terima])
+                        ->whereBetween('connote->updated_at', [$tanggal_kirim, $tanggal_terima]);
+                } else {
+                    return $this->returnEmptyResponse2($kodepelanggan, $nokprk, $tanggal_kirim, $tanggal_terima);
+                }
+            } elseif ($role == 'pelanggan') {
+                $kodepelanggan = Auth::user()->kodepelanggan;
+                $nokprk = null;
+                if ($kodepelanggan) {
+                    $query->where('customer_code', 'like', '%' . $kodepelanggan . '%');
+                } else {
+                    return $this->returnEmptyResponse2($kodepelanggan, null, $tanggal_kirim, $tanggal_terima);
+                }
+    
+                if ($tanggal_kirim && $tanggal_terima) {
+                    $query->whereBetween('connote->created_at', [$tanggal_kirim, $tanggal_terima])
+                        ->whereBetween('connote->updated_at', [$tanggal_kirim, $tanggal_terima]);
+                } else {
+                    return $this->returnEmptyResponse2($kodepelanggan, null, $tanggal_kirim, $tanggal_terima);
+                }
+            } elseif ($role == 'kantor') {
+                $kodepelanggan = null;
+                $nokprk = Auth::user()->nokprk;
+                if ($nokprk) {
+                    $query->where('custom_field->nokprk', (int)$nokprk);
+                } else {
+                    return $this->returnEmptyResponse2(null, $nokprk, $tanggal_kirim, $tanggal_terima);
+                }
+    
+                if ($tanggal_kirim && $tanggal_terima) {
+                    $query->whereBetween('connote->created_at', [$tanggal_kirim, $tanggal_terima])
+                        ->whereBetween('connote->updated_at', [$tanggal_kirim, $tanggal_terima]);
+                } else {
+                    return $this->returnEmptyResponse2(null, $nokprk, $tanggal_kirim, $tanggal_terima);
+                }
+            }
+            $totalRecords = $query->count();
+            $transaksi = $query->limit($limit)->offset($offset)->get();
+            $totalPages = ceil($totalRecords / $limit);
+
+            return view('menukiriman.index', [
+                'transaksi' => $transaksi,
+                'kodepelanggan' => $kodepelanggan,
+                'nokprk' => $nokprk,
+                'tanggal_kirim' => $tanggal_kirim,
+                'tanggal_terima' => $tanggal_terima,
+                'currentPage' => $page,
+                'totalPages' => $totalPages,
+                'limit' => $limit,
+            ]);
+        }
+    }
+
     public function create()
     {
         return view('transaksi.create');
@@ -246,6 +323,17 @@ class TransaksiController extends Controller
     private function returnEmptyResponse($kodepelanggan, $nokprk, $tanggal_kirim, $tanggal_terima)
     {
         return view('transaksi.index', [
+            'transaksi' => collect(),
+            'kodepelanggan' => $kodepelanggan,
+            'nokprk' => $nokprk,
+            'tanggal_kirim' => $tanggal_kirim,
+            'tanggal_terima' => $tanggal_terima,
+        ]);
+    }
+
+    private function returnEmptyResponse2($kodepelanggan, $nokprk, $tanggal_kirim, $tanggal_terima)
+    {
+        return view('menukiriman.index', [
             'transaksi' => collect(),
             'kodepelanggan' => $kodepelanggan,
             'nokprk' => $nokprk,

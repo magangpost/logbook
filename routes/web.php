@@ -20,6 +20,8 @@ Route::group(['middleware' => ['auth', 'role:admin,pelanggan,kantor']], function
     Route::get('/transaksi/export/excel', [TransaksiController::class, 'export_excel'])->name('transaksi.export_excel');
     Route::get('/transaksi/export/csv', [TransaksiController::class, 'export_csv'])->name('transaksi.export_csv');
 
+    Route::get('/menukiriman', [TransaksiController::class, 'index2'])->name('menukiriman.index');
+
     Route::get('/lacak/show', [LacakController::class, 'show'])->name('lacak.show');
     Route::resource('lacak', LacakController::class)->except(['show']);
 });

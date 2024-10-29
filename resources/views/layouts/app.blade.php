@@ -111,6 +111,12 @@
                         </a>
                     </li>
                     <li class="mb-2">
+                        <a class="text-white fs-5" href="{{ route('menukiriman.index') }}">
+                            <i class="bi bi-bag-check fs-5"></i>
+                            Menu Kiriman
+                        </a>
+                    </li>
+                    <li class="mb-2">
                         <a class="text-white fs-5" href="{{ route('lacak.index') }}">
                             <i class="bi bi-search fs-5"></i>
                             Lacak
